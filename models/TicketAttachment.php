@@ -2,6 +2,7 @@
 
 namespace rgen3\tickets\models;
 
+use rgen3\tickets\Module;
 use yii\db\ActiveRecord;
 use yii\web\User;
 
@@ -14,6 +15,7 @@ class TicketAttachment extends ActiveRecord
 
     public function rules()
     {
+        $userModel = Module::$userModel;
         return [
             [['message_id', 'user_id', 'id'], 'integer'],
             [['attachment_name', 'attachment_type'], 'safe'],
@@ -28,7 +30,7 @@ class TicketAttachment extends ActiveRecord
                 'reassigned_to',
                 'exist',
                 'skipOnError' => false,
-                'targetClass' => User::className(),
+                'targetClass' => $userModel::className(),
                 'targetAttribute' => ['user_id' => 'id']
             ]
         ];
@@ -41,6 +43,6 @@ class TicketAttachment extends ActiveRecord
 
     public function getUser()
     {
-        return $this->hasOne(User::class, ['user_id' => 'id']);
+        return $this->hasOne(Module::$userModel, ['user_id' => 'id']);
     }
 }

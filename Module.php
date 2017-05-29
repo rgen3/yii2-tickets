@@ -2,9 +2,15 @@
 
 namespace rgen3\tickets;
 
+use common\models\User;
+
 class Module extends \yii\base\Module
 {
     public $languages;
+
+    public static $defaultUserImage = '/img/partner/ico-money_guy.png';
+
+    public static $userModel = User::class;
 
     public function init()
     {

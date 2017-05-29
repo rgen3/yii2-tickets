@@ -2,7 +2,7 @@
 
 namespace rgen3\tickets\models;
 
-use common\models\User;
+use rgen3\tickets\Module;
 use yii\db\ActiveRecord;
 
 class TicketAssigned extends ActiveRecord
@@ -14,20 +14,21 @@ class TicketAssigned extends ActiveRecord
 
     public function rules()
     {
+        $userModel = Module::$userModel;
         return [
             [['id', 'reassigned_from', 'reassigned_to'], 'integer'],
             [
                 'reassigned_from',
                 'exist',
                 'skipOnError' => false,
-                'targetClass' => User::className(),
+                'targetClass' => $userModel::className(),
                 'targetAttribute' => ['reassigned_from' => 'id']
             ],
             [
                 'reassigned_to',
                 'exist',
                 'skipOnError' => false,
-                'targetClass' => User::className(),
+                'targetClass' => $userModel::className(),
                 'targetAttribute' => ['reassigned_to' => 'id']
             ]
         ];
@@ -35,12 +36,12 @@ class TicketAssigned extends ActiveRecord
 
     public function getReassignedFrom()
     {
-        return $this->hasOne(User::class, ['reassigned_from' => 'id']);
+        return $this->hasOne(Module::$userModel, ['reassigned_from' => 'id']);
     }
 
     public function getReassignedTo()
     {
-        return $this->hasOne(User::class, ['reassigned_to' => 'id']);
+        return $this->hasOne(Module::$userModel, ['reassigned_to' => 'id']);
     }
 
 
