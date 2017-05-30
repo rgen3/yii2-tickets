@@ -24,7 +24,7 @@ class TicketMessage extends ActiveRecord
                 'exist',
                 'skipOnError' => false,
                 'targetClass' => $userModel::className(),
-                'targetAttribute' => ['user_id' => 'id']
+                'targetAttribute' => ['answered_by' => 'id']
             ]
         ];
     }

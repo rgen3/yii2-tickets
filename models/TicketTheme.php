@@ -5,6 +5,7 @@ namespace rgen3\tickets\models;
 use common\models\User;
 use rgen3\tickets\Module;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 class TicketTheme extends ActiveRecord
 {
@@ -52,6 +53,11 @@ class TicketTheme extends ActiveRecord
         return $this->hasOne(TicketMessage::class, ['theme_id' => 'id'])
             ->orderBy(['created_at' => SORT_DESC])
             ->limit(1);
+    }
+
+    public function getUnreadMessages()
+    {
+        return $this->hasMany(TicketMessage::class, ['theme_id' => 'id'])->where(['IS', 'is_new', new Expression('TRUE')]);
     }
 
     public function getDialog()

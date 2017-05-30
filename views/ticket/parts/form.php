@@ -13,6 +13,6 @@ use yii\helpers\Html;
     </div>
     <div class="col-lg-12 form-group">
         <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-success']); ?>
-        <?= $form->field($model, 'status')->checkbox(); ?>
+        <?php /* <?= $form->field($model, 'status')->checkbox(); ?> */ ?>
     </div>
 <?php ActiveForm::end(); ?>

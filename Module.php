@@ -10,6 +10,8 @@ class Module extends \yii\base\Module
 
     public static $defaultUserImage = '/img/partner/ico-money_guy.png';
 
+    public static $defaultAdminId = 2;
+
     public static $userModel = User::class;
 
     public function init()
