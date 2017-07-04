@@ -19,7 +19,7 @@ class UnreadMessages extends Widget
         }
     }
 
-    public function count()
+    protected function count()
     {
         $query = TicketTheme::find()
             ->where(['is_new' => 1, 'user_from' => $this->userId])
@@ -28,8 +28,25 @@ class UnreadMessages extends Widget
         return $query->count();
     }
 
+    protected function getThemes()
+    {
+        $query = TicketTheme::find()
+            ->where(['user_from' => $this->userId])
+            ->orderBy(['updated_at' => SORT_DESC])
+            ->limit(3)
+        ;
+
+        return $query->all();
+    }
+
+
     public function run()
     {
-        return $this->count();
+        return $this->render('@frontend/views/widgets/unread_messages/dropdown.php',
+            [
+                'unreadMessages' => $this->count(),
+                'latestMessages' => $this->getThemes()
+            ]
+        );
     }
 }
