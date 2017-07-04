@@ -75,12 +75,12 @@ class Message extends Controller
     {
         $model = new CreateMessage();
         $model->load(\Yii::$app->request->post());
+        $model->create();
         if (!\Yii::$app->request->isAjax)
         {
             return $this->redirect(["/ticket/dialog/{$model->dialogId}"]);
         }
         \Yii::$app->response->format = Response::FORMAT_JSON;
-        $model->create();
         return $model;
     }
 }

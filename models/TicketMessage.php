@@ -17,7 +17,7 @@ class TicketMessage extends ActiveRecord
     {
         $userModel = Module::$userModel;
         return [
-            [['id', 'answered_by'], 'integer'],
+            [['id', 'answered_by', 'theme_id'], 'integer'],
             ['is_new', 'boolean'],
             [
                 'answered_by',

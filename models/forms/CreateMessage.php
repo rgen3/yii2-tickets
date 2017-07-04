@@ -16,8 +16,6 @@ class CreateMessage extends Model
     public $dialogId;
     public $isNew = 0;
 
-    private $assignedTo;
-
     public function init()
     {
         $this->setUserFrom();

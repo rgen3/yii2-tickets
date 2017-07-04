@@ -84,15 +84,13 @@ class CreateTicket extends Model
             return false;
         }
 
-        $ticketMessage->message = $this->message;
-        $ticketMessage->theme_id = $ticketThemes->id;
-        $ticketMessage->answered_by = \Yii::$app->user->id;
-        $ticketMessage->is_new = 0;
 
-        if ($ticketMessage->validate())
-        {
-            $ticketMessage->save();
-        }
+        $ticketMessage->message = $this->message;
+        $ticketMessage->dialogId = $ticketThemes->id;
+        $ticketMessage->isNew = 0;
+
+        $ticketMessage->create();
+
 
         $this->dialogId = $ticketThemes->id;
 

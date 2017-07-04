@@ -22,7 +22,7 @@ class UnreadMessages extends Widget
     public function count()
     {
         $query = TicketTheme::find()
-            ->where(['is_new' => 1])
+            ->where(['is_new' => 1, 'user_from' => $this->userId])
             ->joinWith('unreadMessages', true);
 
         return $query->count();

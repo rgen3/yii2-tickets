@@ -4,7 +4,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 ?>
-<?php $form = ActiveForm::begin(['method' => 'post', 'action' => 'create']); ?>
+<?php $form = ActiveForm::begin(['method' => 'post', 'action' => '/ticket/create']); ?>
     <div class="col-lg-12 form-group">
         <?= $form->field($model, 'subject')->textInput();?>
         <?= $form->field($model, 'message')->textarea([
