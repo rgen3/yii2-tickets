@@ -4,7 +4,7 @@ namespace rgen3\tickets\traits;
 
 use rgen3\tickets\exceptions\InvalidTranslationKeyException;
 use rgen3\tickets\interfaces\Translation;
-use rgen3\tickets\models\TicketStatusTranslation;
+
 
 trait Translatable
 {
@@ -14,7 +14,7 @@ trait Translatable
     {
         $reflection = new \ReflectionClass($this);
 
-        $shortClassId = $reflection->getShortName();
+        $shortClassId = $reflection->getName();
 
         return sprintf('%sTranslation', $shortClassId);
     }
@@ -43,5 +43,24 @@ trait Translatable
             throw new InvalidTranslationKeyException();
 
         return $this->translations[$lang];
+    }
+
+    public function getTranslationModel($language = null, $initiate = false)
+    {
+        if (is_null($language))
+        {
+            $language = \Yii::$app->language;
+        }
+
+        $translationModel = $this->getTranslationModelId();
+
+        $model = $translationModel::findOne(['language_code' => $language, 'parent_id' => $this->id]);
+
+        if (!$model && $initiate)
+        {
+            $model = new $translationModel();
+        }
+
+        return $model;
     }
 }
