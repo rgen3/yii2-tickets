@@ -15,6 +15,8 @@ class CreateMessage extends Model
     public $message;
     public $dialogId;
     public $isNew = 0;
+    public $statusId;
+    public $statusAt;
 
     public function init()
     {
@@ -41,6 +43,8 @@ class CreateMessage extends Model
         $model->theme_id = $this->dialogId;
         $model->is_new = $this->isNew;
         $model->message = $this->message;
+        $model->status_id = $this->statusId;
+        $model->status_at = $this->statusAt;
 
         if ($model->validate())
         {

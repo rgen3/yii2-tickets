@@ -10,7 +10,7 @@ class TicketMessage extends ActiveRecord
 {
     public static function tableName()
     {
-        return '{{ticket_messages}}';
+        return '{{%ticket_messages}}';
     }
 
     public function rules()
@@ -33,4 +33,11 @@ class TicketMessage extends ActiveRecord
     {
         return $this->hasOne(Module::$userModel, ['id' => 'answered_by']);
     }
+
+    public function getStatus()
+    {
+        return $this->hasOne(TicketStatus::class, ['id' => 'status_id']);
+    }
+
+
 }
