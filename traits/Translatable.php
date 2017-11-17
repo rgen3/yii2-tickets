@@ -44,23 +44,4 @@ trait Translatable
 
         return $this->translations[$lang];
     }
-
-    public function getTranslationModel($language = null, $initiate = false)
-    {
-        if (is_null($language))
-        {
-            $language = \Yii::$app->language;
-        }
-
-        $translationModel = $this->getTranslationModelId();
-
-        $model = TicketStatusTranslation::findOne(['language_code' => $language, 'parent_id' => $this->id]);
-
-        if (!$model && $initiate)
-        {
-            $model = new $translationModel();
-        }
-
-        return $model;
-    }
 }
