@@ -33,26 +33,22 @@ JS;
 //$this->registerJs($script, \yii\web\View::POS_END);
 
 ?>
-<div class="row current-chat-footer">
-    <div class="panel-footer">
-        <?php $form = ActiveForm::begin([
-            'id' => 'ticket-message-form',
-            'method' => 'post',
-            'action' => ['/ticket/answer'],
-            'options' => ['data-pjax' => true ]
-        ]); ?>
-        <?= $form->field($model, 'dialogId')->hiddenInput([
-            'value' => $theme->id
-        ])->label(false); ?>
-        <?= $form->field($model, 'message', [
-            'template' => '<div class="col-sm-12">{label}</div><div class="col-sm-10">{error}</div><div class="col-sm-10">{input}</div>',
-        ]); ?>
-        <?= Html::submitButton(
-            Yii::t('app', 'Send'),
-            [
-                'class' => 'btn btn-success col-sm-2',
-                'type' => 'button'
-            ]); ?>
-        <?php ActiveForm::end(); ?>
-    </div>
-</div>
+<?php $form = ActiveForm::begin([
+    'id' => 'ticket-message-form',
+    'method' => 'post',
+    'action' => ['/ticket/answer'],
+    'options' => ['data-pjax' => true ]
+]); ?>
+<?= $form->field($model, 'dialogId')->hiddenInput([
+    'value' => $theme->id
+])->label(false); ?>
+<?= $form->field($model, 'message', [
+    'template' => '{label}{error}{input}',
+]); ?>
+<?= Html::submitButton(
+    Yii::t('app', 'Send'),
+    [
+        'class' => 'btn btn-success',
+        'type' => 'button'
+    ]); ?>
+<?php ActiveForm::end(); ?>
