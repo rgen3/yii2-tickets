@@ -1,10 +1,12 @@
 <?php
-
 use yii\helpers\Html;
 
-$this->title = Yii::t('app', 'Тикеты');
+use rgen3\tickets\assets\ticketAsset;
+ticketAsset::register($this);
 
+$this->title = Yii::t('app', 'Тикеты');
 ?>
+
 <div class="row tickets-block">
     <div class='<?= $theme ? "col-lg-4 col-md-5 col-sm-12" : "col-lg-12" ?>'>
         <div class="card-box">
